@@ -40,3 +40,10 @@ boat inherit robot
 
 config object parses config file
        person writing this will define config file format
+
+
+
+world
+	a grid of locations. in each location there is height of land
+	height of water above land (can be 0)
+	air is above the water

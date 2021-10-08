@@ -1,0 +1,25 @@
+vec_3d
+
+robot
+	vec_3d location
+	vec_3d estlocation
+
+beacon
+	vec_3d location
+	vec_3d estlocation
+	double rangeError
+
+tank inherits from robot
+     length
+     width     rotation = difference in speed / width
+     two treads
+
+submarine inherit robot
+
+airplane inherit robot
+
+quadcopter inherit robot
+
+car inherit robot
+
+boar inherit robot

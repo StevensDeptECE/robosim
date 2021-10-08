@@ -3,6 +3,7 @@ vec_3d
 robot
 	vec_3d location
 	vec_3d estlocation
+	battery life
 
 beacon
 	vec_3d location
@@ -15,11 +16,34 @@ tank inherits from robot
      two treads
 
 submarine inherit robot
+    can only go where there is water
+    can go from the surface to the bottom
 
 airplane inherit robot
+	 has minimum speed
+	 will crash/glide down if runs out of power
 
 quadcopter inherit robot
-
+   maximum air speed, no minimum (can hover)
+   will crash/glide down if runs out of power
+   
 car inherit robot
+    maximum speed
+    cannot go where water > min depth (can be zero)
+    has steering direction (front wheels turn)
 
-boar inherit robot
+boat inherit robot
+    maximum speed
+    can only go where water depth > min (called draft)
+    define turning: either 2 motors like tank, or one motor + rudder
+    
+
+config object parses config file
+       person writing this will define config file format
+
+
+
+world
+	a grid of locations. in each location there is height of land
+	height of water above land (can be 0)
+	air is above the water

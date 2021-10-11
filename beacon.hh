@@ -1,14 +1,18 @@
 #pragma once
 
+#include <string>
+
 #include "vec_3d.hh"
 
 class beacon {
  private:
+  std::string name;
   vec_3d location, estlocation;
-  double localError, rangeError, power;
+  double localError, rangeError;
 
  public:
-  beacon(vec_3d location, double localError, double rangeError);
+  beacon(std::string name, vec_3d location, double localError,
+         double rangeError);
 
-  double detect_object(double power);
+  friend std::ostream& operator<<(std::ostream& s, beacon a);
 };

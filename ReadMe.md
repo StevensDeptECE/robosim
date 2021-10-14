@@ -21,5 +21,11 @@ should be good to go!
 Git command:
 
 ```shell
-git remote set-url origin git@github.com:StevensDeptECE/GrailGUI.git
+git remote set-url origin [insert your forked repo SSH link here]
 ```
+
+### How to create a pull request
+
+GitHub also has an excellent guide on how to create a pull request: [This guide] (https://docs.github.com/en/github/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
+
+I personally use the CLI, but doing it through the website works just as well.

@@ -1,18 +1,3 @@
-/*
-
-        Author:Zhengguang Wang
-
-        cite:
-        1) W3schools
-        (https://www.w3schools.com/cpp/default.asp)
-        2)overloading not working
-        http://www.cplusplus.com/forum/beginner/158262/
-        3)error: cannot convert 'double' to 'double*'
-        http://www.cplusplus.com/forum/beginner/13832/
-        4)Vectors in a Plane and Space
-        http://www.nabla.hr/PC-VectCoordSyst5.htm
-
-*/
 #pragma once
 
 
@@ -22,52 +7,51 @@ using namespace std;
 
 class world {
  private:
-  int sea_lvl = 0;
-  double X, Y, Elevation;
-
-
- public:
-    world(double x, double y, double z);
+  int sea_lvl = 0, size;
+  double X_elevation,Y_elevation,Z_elevation;
+  double Coordinates[][3];
 
  public:
+
+   world(double x = 0, double y = 0, double z = 0) : X_elevation(x), Y_elevation(y),Z_elevation(sea_lvl - z) {
+
+  }
+  friend world draw_world(world a){
+      return 0;
+  }
+  
+    friend world Coordinates_Matrix(world a) {
+    for (int loop_1=0; loop_1<a.size; loop_1++){
+        for (int loop_2=0; loop_2<3; loop_2++)
+        {
+            if (loop_2 = 1){
+                a.Coordinates[loop_1][loop_2]={a.X_elevation};
+            }
+            if (loop_2 = 2){
+                a.Coordinates[loop_1][loop_2]={a.Y_elevation};
+            }
+            if (loop_2 = 3){
+                a.Coordinates[loop_1][loop_2]={a.Z_elevation};
+            }
+        }
+        
+    }
+    return 0;
+  }
+  
+  
  
-  World(double x = 0, double y = 0, double z = 0) : X(x), Y(y), Z(z) {
-      z = sea_lvl - z;
-  }
-  
-  
-  /*
-  friend vec_3d operator+(vec_3d a, vec_3d b) {
-    return vec_3d(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
-  }
 
-  friend vec_3d operator-(vec_3d a, vec_3d b) {
-    return vec_3d(a.X - b.X, a.Y - b.Y, a.Z - b.Z);
-  }
 
-  friend vec_3d operator-(vec_3d a) { return vec_3d(-a.X, -a.Y, -a.Z); }
-
-  friend ostream& operator<<(ostream& s, vec_3d a) {
-    return s << "(" << a.X << "," << a.Y << "," << a.Z << ")";
-  }
-
-  friend istream& operator>>(istream& s, vec_3d& a) {
-    cout << "input a value for x,y,z & press enter after each input" << endl;
-    return s >> a.X >> a.Y >> a.Z;
-  }
-
-  friend double dot(vec_3d& a, vec_3d& b) {
-    double output = a.X * b.X + a.Y * b.Y + a.Z * b.Z;
-    return output;
-  }
-
-  double mag() {
-    cout << endl << "magnitude of v1 is" << endl;
-    return (abs(sqrt(X * X + Y * Y + Z * Z)));
-  }
-  double magsq() {
-    cout << endl << "magnitude square of v1 is" << endl;
-    return (abs(X * X + Y * Y + Z * Z));
-  }
+  /* 
+  make a class of unit of land (square) variables of elevation of land, water, air, etc.
+  then make a mtrix of the squares within the world class
+  include the draw function: 
+  array of robots & beacons
   */
 };
+
+
+int main() {
+ cout<<"hi"<<endl;
+}

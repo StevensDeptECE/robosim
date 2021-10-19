@@ -78,5 +78,3 @@ friend istream& operator>>(istream& p_cin, vec_3d& num) {
   p_cin >> num.x >> num.y >> num.z;
   return p_cin;
 }
-}
-;

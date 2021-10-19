@@ -2,12 +2,16 @@
 
 #include <iostream>
 #include "robot.hh"
+#include "vec_3d.hh"
 
 class submarine : public robot {
 private:
-  double x, y;
-  double velX, velY;
+  vec_3d pos;
+  vec_3d vel;
+  uint16_t max_speed;
+  int32_t max_depth;
+  bool beached;
 public:
-  Submarine(double x, double y);
+  Submarine(vec_3d pos, vec_3d vel);
   void move();
 };

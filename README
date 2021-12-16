@@ -56,8 +56,9 @@ of 30 degrees may actually be travelling at 3.02m/s at an angle of
 Remember, at each step we will estimate where each robot believes itself to be (estimated position) and keep track of where it actually is. This means that if we always store the real parameter (the steering angle of the car) and the estimated parameter (the estimated angle of the car).
 
 
-The following constructors will define different types we are
-supporting All headings are 0 = east, positive counter-clockwise
+Mathematical Conventions
+
+All headings are 0 = east, positive counter-clockwise in RADIANS
 (normal trig/math conventions). If you want to have true north = 0,
 clockwise, then do that on the input/output side, but since all math
 library functions use trig functions this makes more sense.
@@ -74,6 +75,9 @@ Car(const vec_3d& start_pos, double start_heading, double errStart, double errHe
 
 
 
+Navigational convention (for reading in from file and printing out)
+
+In Navigation North = 0 and goes clockwise in degrees (East = 90, South = 180, ...)
 
 
 

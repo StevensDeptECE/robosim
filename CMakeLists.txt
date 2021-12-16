@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 cmake_minimum_required(VERSION 3.16.1)
 
 project(
@@ -82,3 +83,6 @@ if(ROBOSIM_WERROR)
 endif()
 
 add_executable(robosim airplane.cc beacon.cc boat.cc car.cc main.cc robot.cc submarine.cc world.cc vec_3d.cc)
+=======
+build_executable(robosim random.cc beacon.cc robot.cc car.cc quadcoper.cc boat.cc submarine.cc)
+>>>>>>> 9c4d3d17b51fc6259b44aca1bd30c8ce871f29f0

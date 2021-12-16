@@ -1,121 +1,48 @@
-
 #pragma once
-#include <iostream>
 #include <cmath>
+<<<<<<< HEAD
 
+=======
+#include <iostream>
+using namespace std;
+>>>>>>> 9c4d3d17b51fc6259b44aca1bd30c8ce871f29f0
 
+// Pavlos Tziranis, Anastasios, Aldrin
+// colaborators
 
-// create constructor to create the vec_3d objects
-class vec_3d{
+class vec_3d {
+ private:
+  double x;
+  double y;
+  double z;
 
-    public:
-        double x;
-        double y;
-        double z;
+ public:
+  vec_3d(double a, double b, double c);  // constructor for vec
 
-        vec_3d(double p_x, double p_y, double p_z){
-            x = p_x;
-            y = p_y;
-            z = p_z;
-        }
-        vec_3d(double p_x, double p_y) {
-            x = p_x;
-            y = p_y;
-            z = 0;
-        }
+  friend ostream& operator<<(ostream& s, const vec_3d& v);  // prints a vec
 
-        vec_3d(double p_x){
-            x = p_x;
-            y = 0;
-            z = 0;
-        }
-        vec_3d(){
-            x = 0;
-            y = 0;
-            z = 0;
-        }
+  friend vec_3d operator-(vec_3d p,vec_3d k);  // operator - for subtraction between vecs
 
-    // overload operators for vector math
+  friend vec_3d operator+(vec_3d i,vec_3d j);  // operator + for adding two vecs
 
-    vec_3d operator+ (vec_3d add_num){
-            vec_3d result;
-            result.x = x + add_num.x;
-            result.y = y + add_num.y;
-            result.z = z + add_num.z;
-
-            return result;
-        }
-
-    vec_3d operator- (vec_3d minus_num){
-        vec_3d result;
-        result.x = x - minus_num.x;
-        result.y = y - minus_num.y;
-        result.z = z - minus_num.z;
-
-        return result;
-    }
-
-//    vec_3d operator- (){
-//        vec_3d negation_result(-x, -y, -z);
-//        return negation_result;
-//        }
-
-    vec_3d operator- (){
-        vec_3d result;
-        result.x = -x;
-        result.y = -y;
-        result.z = -z;
-        return result;
-        }
-
-
-    // create three methods to compute various vector properties
-
-    double mag(){
-            double mag_result;
-            double a = abs(x);
-            double b = abs(y);
-            double c = abs(z);
-            mag_result = a+b+c;
-
-            return mag_result;
-        }
-
-
-    double magsq(){
-            double magsq_result;
-            double a = x;
-            double b = y;
-            double c = z;
-            magsq_result = a*a+b*b+c*c;
-
-            return magsq_result;
-        }
-
-    double dot(vec_3d num){
-            double dot_result;
-            dot_result = x*num.x + y*num.y + z*num.z;
-
-            return dot_result;
-        }
-
-    double manhattan_distance(vec_3d num){
-            double md_result;
-            double a = abs(x - num.x);
-            double b = abs(y - num.y);
-            double c = abs(z - num.z);
-
-            md_result = a + b + c;
-            return md_result;
-        }
-
+<<<<<<< HEAD
     friend double dot(const vec_3d& num_1, const vec_3d& num_2);
     friend std::ostream& operator<<(std::ostream& p_cout, const vec_3d& num);
     friend std::istream& operator>>(std::istream& p_cin, const vec_3d& num);
+=======
+  vec_3d operator-();  // negation of given vecs
 
+  friend double dot(const vec_3d a, const vec_3d b);  // dot product of two vecs
+>>>>>>> 9c4d3d17b51fc6259b44aca1bd30c8ce871f29f0
 
+  double mag();  // magnitude of vector
 
+  double magsq();  // magnitude of a vector squared
+
+  double dist(const vec_3d b);  // magnitude distance from starting position of
+                                // const vec_3d b
 };
+<<<<<<< HEAD
 
 
 // compute the dot product as a function
@@ -139,3 +66,5 @@ std::istream& operator>> (std::istream& p_cin, vec_3d& num){
     p_cin >> num.x >> num.y >> num.z;
     return p_cin;
 }
+=======
+>>>>>>> 9c4d3d17b51fc6259b44aca1bd30c8ce871f29f0

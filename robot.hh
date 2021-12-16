@@ -12,14 +12,16 @@ private:
     vec_3d location;
     double BatteryLife;
     
-public: 
-    robot(double x, double y, double z, double BatteryLife) : location(x, y, z), BatteryLife(BatteryLife){}
+public:
+ robot(const vec_3d& location, double BatteryLife);
+ robot(double x, double y, double z, double BatteryLife);
 
-    vec_3d estlocation = location.dist(TestBeacon);
-    
-    friend ostream& operator << ( ostream& a, robot & xyz) {
-        a << xyz.location << "batterylife=" << xyz.BatteryLife << endl;
-        return a; 
+ // void tick();
+ vec_3d estlocation = location.dist(TestBeacon);
+
+ friend ostream& operator<<(ostream& a, robot& xyz) {
+   a << xyz.location << "batterylife=" << xyz.BatteryLife << endl;
+   return a; 
     }
 
 

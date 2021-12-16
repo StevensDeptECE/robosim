@@ -9,7 +9,8 @@ extern beacon TestBeacon;
 
 class robot {
 private:
-    vec_3d location;
+    vec_3d location;     // the real location of this robot in the simulation
+    vec_3d est_loc;      // the estimated location based on navigation, which will have error
     double BatteryLife;
     
 public:

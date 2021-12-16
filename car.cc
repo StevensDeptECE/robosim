@@ -1,23 +1,46 @@
-#pragma once
 #include <iostream>
-#include "robot.hh"
-#include <string>
+#include <cmath>
+#include "car.hh"
+#include "random.hh"
 
-//Initial idea: since the car will only travel in 2d, at sea level, v will be the velocity of the car,
-//0 <= v <= ???. x will be the x axis of the car's location on the world.hh grid. y will be the y axis location
-// on the grid. 
-//Battery/fuel may be needed? 
 
-car::car (const std::string& name, double x, double y) : name(name), x(x), y(y) {}
+using namespace std;
 
-void car::carDirection (double x1, double y1)
-{
-  //double car's direction = sqrt(x1*x1+y1*y1)
+
+// Define Car Constructor
+car:: car(double const vec_3d& loc, double horizontal_variance, double vertical_variance, double heading, double speed, double BatteryLife, double steering_angle, double r, double steering_angle_error)
+        : robot(loc, horizontal_variance, vertical_variance, heading, speed,  BatteryLife),
+          steering_angle(steering_angle),
+          r(r),
+          steering_angle_error(steering_angle_error)
+          {
+
 }
 
-void car::carSpeed(double v)
-{			//the car can stop, v=0, with a maximum speed of ???.
-  this->carSpeed = v;
+
+// Define Method To Turn Radians
+// streeing angle = turn val + error
+void car:: turn(double turn_val){
+    steering_angle = turn_val + N(0, steering_angle_error);
 }
 
-std::ostream& operator <<(std::ostream& a, car & xy)
+
+// how the car actually move
+void car:: move (double dt){
+    // calculate the turning angle
+    heading += steering_angle;
+
+    // calculate the radius with consideration of speed
+    r = r + speed*dt;
+
+
+    location = location + heading + ;
+
+}
+// how fast the heading turn
+
+
+
+
+
+

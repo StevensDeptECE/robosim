@@ -1,14 +1,20 @@
 #pragma once
-
 #include <iostream>
 #include "robot.hh"
 
 class car : public robot {
 private:
-    double x, y;
-    double vel_x, vel_y, max_speed;
-public:
-    car(double x = 0, double y = 0, double vel_x= 0, double vel_y = 0, double max_speed)
+    double steering_angle;
+    // turn radians
+    // positive right
+    double r;// turning radius  limit of car turn
+    double steering_angle_error;
 
+
+public:
+    // Define Constructor
+    car(double const vec_3d& loc, double horizontal_variance, double vertical_variance, double heading, double speed, double BatteryLife, double steering_angle, double r, double steering_angle_error);
+    void turn(double turn_val);
+    virtual void move(double dt);
 
 };

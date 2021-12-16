@@ -33,6 +33,15 @@ robot::robot(string name, const vec_3d& pos, double posVarHoriz,
       headingVert(headingVert),
       BatteryLife(BatteryLife) {}
 
+void robot::move(double time) {
+  double velX = time * speed * cos(heading);
+  double velY = time * speed * sin(heading);
+  double velZ = time * headingVert;
+  location.x += velX;
+  location.y += velY;
+  location.z += velZ;
+}
+
 vec_3d robot::getEstLocation(vector<beacon> beacons) {
   vector<double> dists;
   for (beacon b : beacons) {

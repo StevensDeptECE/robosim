@@ -19,6 +19,7 @@ class beacon {
   beacon(std::string name, double x, double y, double z);
 
   vec_3d getLoc() const;
+  vec_3d get_est_loc() const;
 
   friend std::ostream& operator<<(std::ostream& s, beacon a);
 };

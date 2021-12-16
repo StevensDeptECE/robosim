@@ -21,6 +21,7 @@ void beacon::estimate_loc() {
 }
 
 vec_3d beacon::getLoc() const { return location; };
+vec_3d beacon::get_est_loc() const { return estlocation; };
 
 ostream& operator<<(ostream& s, beacon a) {
   return s << a.name << ' ' << a.location << ' ' << a.estlocation;

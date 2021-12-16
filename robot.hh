@@ -1,3 +1,5 @@
+#pragma once
+
 #include "vec_3d.hh" 
 #include "beacon.hh"
 #include <string>

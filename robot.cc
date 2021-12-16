@@ -21,7 +21,6 @@ positions
 - heading = horizontal direction from 0 to 2pi (in radians) of the robot
 - speed = speed in the forward direction
 - batteryLife = current battery life of the robot
-<<<<<<< HEAD
 For the estimated location, it is calculated by taking the real location and
 adding some Gaussian error, which is a vector 3D consisting where each x, y, and
 z component is Gaussian with a mean of 0 and variance that is passed to the
@@ -32,20 +31,13 @@ object (horizontal variance and vertical variance).
 
 #include "beacon.hh"
 
-=======
-For the estimated location, it is calculated by taking the real location and adding some Gaussian error,
-which is a vector 3D consisting where each x, y, and z component is Gaussian with a mean of 0 and variance 
-that is passed to the object (horizontal variance and vertical variance).
-*/
-
-// Constructor
->>>>>>> c8763c539bd05d822033960176b1d32ff0116067
 robot::robot(string name, double x, double y, double z, double posVarHoriz,
              double posVarVert, double heading, double speed,
              double headingVert, double BatteryLife = 100)
     : name(name),
       location(vec_3d(x, y, z)),
-      estLocation(location + vec_3d(N(0, posVarHoriz), N(0, posVarHoriz), N(0, posVarVert))),
+      estLocation(location + vec_3d(N(0, posVarHoriz), N(0, posVarHoriz),
+                                    N(0, posVarVert))),
       posVarHoriz(posVarHoriz),
       posVarVert(posVarVert),
       heading(heading),
@@ -59,7 +51,8 @@ robot::robot(string name, const vec_3d& pos, double posVarHoriz,
              double headingVert, double BatteryLife = 100)
     : name(name),
       location(pos),
-      estLocation(location + vec_3d(N(0, posVarHoriz), N(0, posVarHoriz), N(0, posVarVert))),
+      estLocation(location + vec_3d(N(0, posVarHoriz), N(0, posVarHoriz),
+                                    N(0, posVarVert))),
       posVarHoriz(posVarHoriz),
       posVarVert(posVarVert),
       heading(heading),
@@ -93,12 +86,3 @@ std::ostream& robot::operator<<(std::ostream& s, robot& r) {
     << endl;
   return s;
 }
-<<<<<<< HEAD
-=======
-
-// Displaying battery life
-ostream& operator<< (std::ostream& a, robot & xyz) {
-        a << xyz.location << "batterylife=" << xyz.BatteryLife << endl;
-        return a; 
-    }
->>>>>>> c8763c539bd05d822033960176b1d32ff0116067

@@ -1,30 +1,31 @@
-//Irakli Okruashvili
+// Irakli Okruashvili
 #pragma once
 #include <iostream>
 #include <string>
-#include "vec_3d.hh"
-#include "robot.hh"
 
-using namespace std;
+#include "robot.hh"
+#include "vec_3d.hh"
 
 class quadcopter : public robot {
-private:
-  string name;
-  vec_3d location;
-  double x, y, z;
-  double throttle, raw, pitch, yaw, airSpeed;
+ private:
+  vec_3d direction, location;
+  double throttle, roll, pitch, yaw, airSpeed;
 
-public:
-  quadcopter(const string& name="", const vec_3d& pos=vec_3d(0,0,0)) : name(name), location(pos) {}
-  quadcopter(const string& name="", double x = 0, double y = 0, double z = 0) : name(name), location(vec_3d(x, y, z)) {}
-  void tick();
-  void loc_change(double dx, double dy, double dz);
-  void setThrottle(double h);
-  void setRaw(double r);
-  void setPitch(double p);
-  void setYaw(double w);
-  void setAirSpeed(double s);
-  void update(double dt);
+ public:
+  quadcopter(std::string name, double x, double y, double z, double posVarHoriz,
+             double posVarVert, double heading, double speed,
+             double headingVert, double BatteryLife);
 
-  friend ostream& operator <<(ostream& s, const quadcopter& a);
+  quadcopter(std::string name, const vec_3d& pos, double posVarHoriz,
+             double posVarVert, double heading, double speed,
+             double headingVert, double BatteryLife);
+  void move(double time);
+  void calculateDir();
+  void setThrottle(double h) { throttle = h; }
+  void setRoll(double r) { roll = r; }
+  void setPitch(double p) { pitch = p; }
+  void setYaw(double w) { yaw = w; }
+  void setAirSpeed(double s) { airSpeed = s; }
+
+  //  friend ostream& operator<<(ostream& s, const quadcopter& a);
 };

@@ -5,9 +5,36 @@
 #include "vec_3d.hh"
 #include "robot.hh"
 
-using namespace std;
+// Collaborators: Pavlos Tziranis, Aldrin Padua, Anastasios Zochios
 
 class quadcopter : public robot {
+<<<<<<< HEAD
+    public:
+        quadcopter(double x, double y, double z, double hvar, double vvar, double hdg, double speed, double battlife);
+
+        void loc_change(double dx, double dy, double dz);
+
+        void setThrottle(double h);
+
+        void setRaw(double r);
+
+        void setPitch(double p);
+
+        void setYaw(double w);
+
+        void setAirSpeed(double s);
+        
+        void update(double dt);
+
+        friend ostream& operator <<(ostream& s, const quadcopter& a);
+
+    private:
+        double throttle;
+        double raw;
+        double pitch;
+        double yaw; 
+        double airSpeed;
+=======
 private:
   string name;
   vec_3d location;
@@ -27,4 +54,5 @@ public:
   void update(double dt);
 
   friend ostream& operator <<(ostream& s, const quadcopter& a);
+>>>>>>> c8763c539bd05d822033960176b1d32ff0116067
 };

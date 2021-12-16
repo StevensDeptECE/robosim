@@ -1,12 +1,17 @@
 #pragma once
 #include <iostream>
 #include <string>
+
 #include "robot.hh"
 
-//Should inherit from robot
+// Should inherit from robot
 class airplane : public robot {
-  public:
-  airplane(const string& name, double x, double y, double z) : name(name), x(x), y(y), z(z) {}
+ private:
+  std::string name;
 
-  friend std::ostream& operator <<(ostream& s, const airplane& a);
+ public:
+  airplane(const std::string& name, double x, double y, double z)
+      : robot(x, y, z, 100), name(name) {}
+
+  friend std::ostream& operator<<(std::ostream& s, const airplane& a);
 };

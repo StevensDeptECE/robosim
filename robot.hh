@@ -9,11 +9,14 @@ extern beacon TestBeacon;
 
 class robot {
 private:
-    vec_3d location;
+    vec_3d location;     // the real location of this robot in the simulation
+    vec_3d est_loc;      // the estimated location based on navigation, which will have error
+    double heading;      // horizontal direction from 0 to 2pi
+    double speed;        // speed in the forward direction
     double BatteryLife;
     
 public: 
-    robot(double x, double y, double z, double BatteryLife) : location(x, y, z), BatteryLife(BatteryLife){}
+    robot(const vec_3d& loc, double horizontal_variance, double vertical_variance, double heading, double speed, double BatteryLife = 0);
 
     vec_3d estlocation = location.dist(TestBeacon);
     

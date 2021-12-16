@@ -1,42 +1,34 @@
 /*
     Author : Ming-Hung Yen and Aleksandar Dimoski
 */
+#pragma once
+
+#include <vector>
 
 #include "beacon.hh"
 #include "vec_3d.hh"
 
-extern beacon TestBeacon;
-
 class robot {
-<<<<<<< HEAD
  private:
   string name;
   vec_3d location;
+  vec_3d estLocation;
   double BatteryLife, posVarHoriz, posVarVert, heading, speed, headingVert;
-=======
-private:
-    vec_3d location;     // the real location of this robot in the simulation
-    vec_3d est_loc;      // the estimated location based on navigation, which will have error
-    double BatteryLife;
-    
-public:
- robot(const vec_3d& location, double BatteryLife);
- robot(double x, double y, double z, double BatteryLife);
->>>>>>> 959a9741665b2566e336f253c360584b94af250e
 
  public:
-  //  robot(const vec_3d& location, double BatteryLife);
-  //  robot(double x, double y, double z, double BatteryLife);
   robot(string name, double x, double y, double z, double posVarHoriz,
-        double posVarVert, double heading, double speed, double headingVert);
+        double posVarVert, double heading, double speed, double headingVert,
+        double BatteryLife);
+
   robot(string name, const vec_3d& pos, double posVarHoriz, double posVarVert,
-        double heading, double speed, double headingVert);
+        double heading, double speed, double headingVert, double BatteryLife);
 
-  // void tick();
-  vec_3d estlocation = location.dist(TestBeacon);
+  void move(double time);
+  vec_3d getEstLocation(vector<beacon> beacons);
 
-  friend ostream& operator<<(ostream& a, robot& xyz) {
-    a << xyz.location << "batterylife=" << xyz.BatteryLife << endl;
-    return a;
-  }
+  vec_3d getLocation() const { return location; }
+  double getBatLife() const { return BatteryLife; }
+  string getName() const { return name; }
+
+  friend std::ostream& operator<<(std::ostream& a, robot& xyz);
 };

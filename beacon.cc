@@ -6,17 +6,20 @@
 #include "random.hh"
 #include "vec_3d.hh"
 
+using namespace std;
+
 // Authors: Anastasios Zochios, Pavlos Tziranis
 
-beacon::beacon(std::string name, vec_3d location, double localError = 0.05,
-               double rangeError)
-    : name(name),
-      location(location),
-      localError(localError),
-      rangeError(rangeError) {}
+beacon::beacon(string name, double x, double y, double z)
+    : name(name), location(vec_3d(x, y, z)) {}
 
-// beacon::double detect_object(double power);
-/* Adding a scalar to a vector; vec_3d operator+ needs to initialize a scalar as
- * vector */
-friend ostream& operator<<(ostream& s, beacon a) {
+// outputs the estimated location of the beacon updated with a normally
+// distrubuted error with mean=0 & std.dev = 2
+void beacon::estimate_loc() {
+  vec_3d error(N(0, 2), N(0, 2), N(0, 2));
+  estlocation = location + error;
+}
+
+ostream& operator<<(ostream& s, beacon a) {
   return s << a.name << a.location + a.localError;
+}

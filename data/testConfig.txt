@@ -1,0 +1,6 @@
+robot   name    x   y   z   positionVarianceHorizontal  positionVarianceVertical    heading speed   headingVertical
+(replace "robot" with your class name)
+(all constructors need these things. ANYTHING else must be default)
+
+beacon  name    x   y   z   positionVarianceHorizontal  positionVarianceVertical
+

@@ -3,7 +3,6 @@
 #include <iostream>
 #include <cmath>
 
-using namespace std;
 
 
 // create constructor to create the vec_3d objects
@@ -110,7 +109,9 @@ class vec_3d{
             return md_result;
         }
 
-
+    friend double dot(const vec_3d& num_1, const vec_3d& num_2);
+    friend std::ostream& operator<<(std::ostream& p_cout, const vec_3d& num);
+    friend std::istream& operator>>(std::istream& p_cin, const vec_3d& num);
 
 
 
@@ -126,23 +127,15 @@ double dot(vec_3d num_1, vec_3d num_2){
 
 
 // Overload the << operator
-ostream& operator<< (ostream& p_cout, vec_3d& num){
+std::ostream& operator<< (std::ostream& p_cout, vec_3d& num){
     p_cout << "(" << num.x <<"," << num.y << "," << num.z <<")" ;
     return p_cout;
 }
 
 
 // Overload the >> operator
-istream& operator>> (istream& p_cin, vec_3d& num){
+std::istream& operator>> (std::istream& p_cin, vec_3d& num){
 
     p_cin >> num.x >> num.y >> num.z;
     return p_cin;
 }
-
-
-
-
-int main() {
-  //
-}
-

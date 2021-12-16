@@ -12,8 +12,10 @@ class beacon {
   double localError, rangeError;
 
  public:
+  beacon(std::string name, double x, double y, double z, 
+       double localError, double rangeError);
   beacon(std::string name, vec_3d location, double localError,
          double rangeError);
 
-  friend std::ostream& operator<<(std::ostream& s, beacon a);
+  friend std::ostream& operator<<(std::ostream& s, const beacon& a);
 };

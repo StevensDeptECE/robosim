@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 
+#include "random.hh"
 #include "vec_3d.hh"
 
 // Authors: Anastasios Zochios, Pavlos Tziranis

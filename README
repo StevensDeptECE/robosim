@@ -1,0 +1,114 @@
+Robosim is a class final project for advanced students of CPE553 C++ 2021F
+Designed by Dov Kruger, the teaching associate professor running the class.
+
+We are creating a simulation where we know the exact position of a set
+of robots and navigation beacons, but can create specific errors and
+use localization algorithms to estimate their position.
+
+The advantage of a simulation is that in the virtual world, we know
+exactly where each object is (because we make up the facts). In the
+real world, the only way to measure the effectiveness of navigational
+tools is to have another method of measurement that is more accurate
+than the one being tested. In reality, this almost never happens, so
+simulation is by far the easiest way to test the mathematics of
+localization algorithms independent of the devices measuring the data.
+
+Robosim uses a single random number generator, located in random.cc
+The header file used to refer to this is random.hh
+
+The base class Robot contains a vec_3d pos variable which is the actual location of the robot. There is also est_pos which is the estimated position. At any moment, the error in position is est_pos - pos.
+
+The base class Beacon also contains a vec_3d pos variable and est_pos
+variable with the location and estimated location of the beacon
+respectively.  Beacons report a range, that is a distance from the
+location of the beacon to the location of the robot. There are a
+number of errors that can be set in the simulation. The beacon's
+position is by definition correct. However from the point of view of
+the navigation algorithm it will only know about the estimated
+position (the incorrect) value.
+
+The range from the beacon to the robot is based on robot.pos - beacon.pos
+
+All errors are considered to be normally distributed with a variance sigma**2.
+This would presumably mean that distance errors are measured with an accuracy prortional to the distance from tbe beacon:
+
+d = (robot.pos - beacon.pos).mag(); // compute real distance
+return d * (1+N(0, relerr2));
+
+Thus if sigma2 = .01, we can expect 33% of the time that distance +/- 1%
+67% +/- 2%, 95% +/- 3%, etc.
+
+There may also be an absolute error which we can model by adding a normal distribution 
+return d * (1+N(0, relerr2)) + N(0,abbserr2) ;
+
+
+We will each write a single kind of robot. Each one will have errors
+in controls meaning that it will not move exactly as it is supposed
+to. For example, a car will have a steering error, so that the angle
+that it turns is +/- some small amount from what the control says. It
+may also have a dynamic error so the angle changes in time. We should
+create both types of error but can leave the second one with amplitude
+zero for now. A car will also have a speed, and that will also have an
+error.  Thus a car believes that it is travelling at 3m/s at an angle
+of 30 degrees may actually be travelling at 3.02m/s at an angle of
+30.25 degrees.
+
+Remember, at each step we will estimate where each robot believes itself to be (estimated position) and keep track of where it actually is. This means that if we always store the real parameter (the steering angle of the car) and the estimated parameter (the estimated angle of the car).
+
+
+The following constructors will define different types we are
+supporting All headings are 0 = east, positive counter-clockwise
+(normal trig/math conventions). If you want to have true north = 0,
+clockwise, then do that on the input/output side, but since all math
+library functions use trig functions this makes more sense.
+
+All errors are variances and assumed to have mean zero error We can
+assume instantaneous acceleration to make things simpler, so a robot
+is either moving v=0 or if it specifies a new speed, it is instantly
+that speed.
+
+It is possible during the hackathon someone can do a vehicle with
+actual acceleration depending on time.
+
+Car(const vec_3d& start_pos, double start_heading, double errStart, double errHeading, double errSpeed)
+
+
+
+
+
+
+
+Algorithms
+
+Kalman Filtering
+For a Kalman filter on a variable the inputs are weighted inversely according to variance. For example, consider a single variable x from 0 to 10m. There are two walls at x=0 and x=10. We know the robot is somewhere between 0 and 10. Two sonars measure distance to each wall. Suppose the claim is that these sonars have variance of 0.2m
+Given d1 = 5m and d2 = 5m, our best estimate is x=5m with variance .2m
+
+Given d1 = 4m, d2 = 4m, this is clearly not possible. Either x=4m or x=6m. it cannot be both. What this really means is that either
+a) one of the sensors has a lot bigger error than you thought (variance is not properly estimated)
+b) there is an error of some kind (in reality, sometimes a false echo will create a spurious reading)
+This means that really error is not normally distributed. It may be:
+   x = x_real + N(0, err2) + (r < p2 > N(0, big2) : 0)
+   if a random number r < p2, some small probability, then a much bigger error is added.
+c) The physical relationship you thought was valid isn't, for example the room is not 10m long
+
+Kalman does not really discuss how to estimate the variance of each instrument.
+The problem of trying to figure out WHICH inputs are broken is a difficult, Bayesian problem.
+
+Combining results across time
+Given an estimate of state (x,y,z) at time t, and a known physical model (moving s m/s in direction (dx,dy,dz) then at time t2 we can estimate we are at:
+(x+s*dx, y+s*dy, z+s*dz)
+
+this estimate also has errors, often larger than the measurement errors from GPS for example, but not when GPS is broken for example.
+
+
+
+Particle filter
+
+In a particle filter, instead of a single Kalman estimate, we choose n particles and each one has an estimate and a variance. Based on a probability distribution we estimate the likelihood of each particle. The estimated position and variance are:
+
+xmean = sum p_i * x_i
+variance = p_i * (x_i - xmean)^2
+
+The computational cost = n * kalman.
+

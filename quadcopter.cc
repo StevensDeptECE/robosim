@@ -1,13 +1,10 @@
-//Irakli Okruashvili
-#pragma once
-#include <iostream>
-#include <string>
-#include "robot.hh"
-
+#include "quadcopter.cc"
 
 class quadcopter : public robot {
     public:
-        quadcopter(double x, double y, double z, double hvar, double vvar, double hdg, double speed, double battlife);
+        quadcopter(double x = 0, 
+            double y = 0, double z = 0, double hvar, double vvar, double hdg, double speed, double battlife) 
+            : robot(vec_3d(x, y, z), hvar, vvar, hdg, speed, battlife) {};
 
         void loc_change(double dx, double dy, double dz);
 
